@@ -68,6 +68,13 @@ namespace ConnexionSQL
                     // Carga los datos del lector en el DataTable.
                     dataTable.Load(reader);
 
+                    string text = "Nombre de las columnas: \n";
+                    foreach (DataColumn col in dataTable.Columns)
+                    {
+                        text += col.ColumnName + "\n";
+                    }
+                    MessageBox.Show(text);
+
                     // Establecer el DataTable como origen de datos del DataGridView.
                     dataGridView1.DataSource = dataTable;
                 }
