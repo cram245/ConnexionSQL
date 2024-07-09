@@ -17,7 +17,7 @@ namespace ConnexionSQL
         public Form1()
         {
             InitializeComponent();
-            butDisconnect.Enabled = false;
+            CheckConnection();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,12 +28,11 @@ namespace ConnexionSQL
                 "Password = Sql#123456789;";
 
             try {
-                butConnect.Enabled = false;
+                
                 connection = new SqlConnection(connectionString);
                 connection.Open();
+                CheckConnection();
                 
-                butDisconnect.Enabled = true;
-                connectionState.Text = connection.State.ToString();
             }
             catch (Exception error) {
                 butConnect.Enabled = true;
@@ -44,54 +43,77 @@ namespace ConnexionSQL
 
         private void butDisconnect_Click(object sender, EventArgs e)
         {
-
-            try 
-            {
-                if (connection.State != ConnectionState.Open)
-                {
-                    return;
-                }
-                    
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return;
-            }
-
-
             try
             {
-                butDisconnect.Enabled = false;
                 connection.Close();
-                connectionState.Text = connection.State.ToString();
-                
-                butConnect.Enabled = true;
             }
             catch (Exception error) {
-                butDisconnect.Enabled = true;
-                butConnect.Enabled = false;
                 MessageBox.Show(error.Message);
             }
+            CheckConnection();
         }
 
         private void buttExecute_Click(object sender, EventArgs e)
         {
-            SqlCommand command = new SqlCommand(textBox1.Text, connection);
-
-            command.ExecuteNonQuery();
-
-            using (SqlDataReader reader = command.ExecuteReader())
+            try
             {
-                // Crear un DataTable para almacenar los resultados.
-                DataTable dataTable = new DataTable();
+                SqlCommand command = new SqlCommand(textBox1.Text, connection);
+                command.ExecuteNonQuery();
 
-                // Carga los datos del lector en el DataTable.
-                dataTable.Load(reader);
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    // Crear un DataTable para almacenar los resultados.
+                    DataTable dataTable = new DataTable();
 
-                // Establecer el DataTable como origen de datos del DataGridView.
-                dataGridView1.DataSource = dataTable;
+                    // Carga los datos del lector en el DataTable.
+                    dataTable.Load(reader);
+
+                    // Establecer el DataTable como origen de datos del DataGridView.
+                    dataGridView1.DataSource = dataTable;
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void CheckConnection()
+        {
+            if (connection == null)
+            {
+                butConnect.Enabled = true;
+                butDisconnect.Enabled = false;
+                buttExecute.Enabled = false;
+                connectionState.Text = "Stand by";
+                return;
+            }
+
+            switch (connection.State)
+            {
+                case ConnectionState.Open:
+                    butConnect.Enabled = false;
+                    butDisconnect.Enabled = true;
+                    buttExecute.Enabled = true;
+                    break;
+                case ConnectionState.Closed:
+                    butConnect.Enabled = true;
+                    butDisconnect.Enabled = false;
+                    buttExecute.Enabled = false;
+                    break;
+                case ConnectionState.Broken:
+                    butConnect.Enabled = true;
+                    butDisconnect.Enabled = false;
+                    buttExecute.Enabled = false;
+                    break;
+                default:
+                    butConnect.Enabled = false;
+                    butDisconnect.Enabled = true;
+                    buttExecute.Enabled = true;
+                    break;
+            }
+
+            connectionState.Text = connection.State.ToString();
         }
     }
 }
