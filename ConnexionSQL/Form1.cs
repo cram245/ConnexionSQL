@@ -28,32 +28,69 @@ namespace ConnexionSQL
                 "Password = Sql#123456789;";
 
             try {
-
+                butConnect.Enabled = false;
                 connection = new SqlConnection(connectionString);
                 connection.Open();
-                butConnect.Enabled = false;
+                
                 butDisconnect.Enabled = true;
                 connectionState.Text = connection.State.ToString();
-                
-
-
             }
-            catch (Exception error) { 
+            catch (Exception error) {
+                butConnect.Enabled = true;
+                butDisconnect.Enabled = false;
                 MessageBox.Show(error.Message);
             }
         }
 
         private void butDisconnect_Click(object sender, EventArgs e)
         {
+
+            try 
+            {
+                if (connection.State != ConnectionState.Open)
+                {
+                    return;
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+
             try
             {
+                butDisconnect.Enabled = false;
                 connection.Close();
                 connectionState.Text = connection.State.ToString();
-                butDisconnect.Enabled = false;
+                
                 butConnect.Enabled = true;
             }
             catch (Exception error) {
+                butDisconnect.Enabled = true;
+                butConnect.Enabled = false;
                 MessageBox.Show(error.Message);
+            }
+        }
+
+        private void buttExecute_Click(object sender, EventArgs e)
+        {
+            SqlCommand command = new SqlCommand(textBox1.Text, connection);
+
+            command.ExecuteNonQuery();
+
+            using (SqlDataReader reader = command.ExecuteReader())
+            {
+                // Crear un DataTable para almacenar los resultados.
+                DataTable dataTable = new DataTable();
+
+                // Carga los datos del lector en el DataTable.
+                dataTable.Load(reader);
+
+                // Establecer el DataTable como origen de datos del DataGridView.
+                dataGridView1.DataSource = dataTable;
             }
         }
     }
