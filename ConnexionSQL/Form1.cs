@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,9 +19,14 @@ namespace ConnexionSQL
         {
             InitializeComponent();
             CheckConnection();
+
+            Employee employee = new Employee(1, "asjbjb", "jsdj", "something", "12345", new DateTime(), 12, 24.5, 3, 4);
+            //string text = employee.GetInsertionQuery();
+            
+            //MessageBox.Show(text);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void butConnect_Click(object sender, EventArgs e)
         {
             string connectionString = "Data source= 200.234.224.123,54321;" +
                 "Initial Catalog= MarcAlbaEmployees;" +
@@ -121,6 +127,12 @@ namespace ConnexionSQL
             }
 
             connectionState.Text = connection.State.ToString();
+        }
+
+        private void butInsertEmployee_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2();
+            f.ShowDialog();
         }
     }
 }

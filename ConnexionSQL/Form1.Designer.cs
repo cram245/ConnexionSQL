@@ -34,6 +34,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttExecute = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.butInsertEmployee = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,7 +46,7 @@
             this.butConnect.TabIndex = 0;
             this.butConnect.Text = "Connectar";
             this.butConnect.UseVisualStyleBackColor = true;
-            this.butConnect.Click += new System.EventHandler(this.button1_Click);
+            this.butConnect.Click += new System.EventHandler(this.butConnect_Click);
             // 
             // butDisconnect
             // 
@@ -92,11 +93,22 @@
             this.dataGridView1.Size = new System.Drawing.Size(475, 210);
             this.dataGridView1.TabIndex = 5;
             // 
+            // butInsertEmployee
+            // 
+            this.butInsertEmployee.Location = new System.Drawing.Point(508, 262);
+            this.butInsertEmployee.Name = "butInsertEmployee";
+            this.butInsertEmployee.Size = new System.Drawing.Size(128, 23);
+            this.butInsertEmployee.TabIndex = 6;
+            this.butInsertEmployee.Text = "Insert employee";
+            this.butInsertEmployee.UseVisualStyleBackColor = true;
+            this.butInsertEmployee.Click += new System.EventHandler(this.butInsertEmployee_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(640, 349);
+            this.Controls.Add(this.butInsertEmployee);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.buttExecute);
             this.Controls.Add(this.textBox1);
@@ -119,6 +131,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttExecute;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button butInsertEmployee;
     }
 }
 
