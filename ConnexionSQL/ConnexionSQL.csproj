@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DBConnection.cs" />
+    <Compile Include="Department.cs" />
+    <Compile Include="DepartmentDAL.cs" />
     <Compile Include="employee.cs" />
     <Compile Include="EmployeeDAL.cs" />
     <Compile Include="Form1.cs">

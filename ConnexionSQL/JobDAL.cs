@@ -30,7 +30,7 @@ namespace ConnexionSQL
                 Job job = new Job();
 
                 job.JobId = reader.GetInt32(reader.GetOrdinal("job_id"));
-                job.JobTittle = reader.GetString(reader.GetOrdinal("job_tittle"));
+                job.JobTittle = reader.GetString(reader.GetOrdinal("job_title"));
 
                 if (!reader.IsDBNull(reader.GetOrdinal("min_salary")))
                     job.MinSalary = reader.GetDecimal(reader.GetOrdinal("min_salary"));

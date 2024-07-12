@@ -19,11 +19,6 @@ namespace ConnexionSQL
         {
             InitializeComponent();
             CheckConnection();
-
-            Employee employee = new Employee(1, "asjbjb", "jsdj", "something", "12345", new DateTime(), 12, 24.5, 3, 4);
-            //string text = employee.GetInsertionQuery();
-            
-            //MessageBox.Show(text);
         }
 
         private void butConnect_Click(object sender, EventArgs e)

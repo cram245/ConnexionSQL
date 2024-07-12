@@ -38,7 +38,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lastNameBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.jobIdBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.salaryBox = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -46,10 +45,13 @@
             this.label9 = new System.Windows.Forms.Label();
             this.phoneNumberBox = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.departmentIdBox = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.managerIdBox = new System.Windows.Forms.TextBox();
             this.butInsert = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.butSelectAll = new System.Windows.Forms.Button();
+            this.comboDepartment = new System.Windows.Forms.ComboBox();
+            this.comboJob = new System.Windows.Forms.ComboBox();
+            this.comboEmployee = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // employeeIdBox
@@ -134,13 +136,6 @@
             this.label6.TabIndex = 16;
             this.label6.Text = "Job id:";
             // 
-            // jobIdBox
-            // 
-            this.jobIdBox.Location = new System.Drawing.Point(327, 241);
-            this.jobIdBox.Name = "jobIdBox";
-            this.jobIdBox.Size = new System.Drawing.Size(139, 20);
-            this.jobIdBox.TabIndex = 7;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -198,13 +193,6 @@
             this.label12.TabIndex = 20;
             this.label12.Text = "Department id:";
             // 
-            // departmentIdBox
-            // 
-            this.departmentIdBox.Location = new System.Drawing.Point(606, 174);
-            this.departmentIdBox.Name = "departmentIdBox";
-            this.departmentIdBox.Size = new System.Drawing.Size(139, 20);
-            this.departmentIdBox.TabIndex = 10;
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -213,13 +201,6 @@
             this.label13.Size = new System.Drawing.Size(63, 13);
             this.label13.TabIndex = 18;
             this.label13.Text = "Manager id:";
-            // 
-            // managerIdBox
-            // 
-            this.managerIdBox.Location = new System.Drawing.Point(606, 99);
-            this.managerIdBox.Name = "managerIdBox";
-            this.managerIdBox.Size = new System.Drawing.Size(139, 20);
-            this.managerIdBox.TabIndex = 9;
             // 
             // butInsert
             // 
@@ -231,18 +212,63 @@
             this.butInsert.UseVisualStyleBackColor = true;
             this.butInsert.Click += new System.EventHandler(this.butInsert_Click);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.HorizontalScrollbar = true;
+            this.listBox1.Location = new System.Drawing.Point(12, 369);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(580, 186);
+            this.listBox1.TabIndex = 22;
+            // 
+            // butSelectAll
+            // 
+            this.butSelectAll.Location = new System.Drawing.Point(609, 430);
+            this.butSelectAll.Name = "butSelectAll";
+            this.butSelectAll.Size = new System.Drawing.Size(136, 34);
+            this.butSelectAll.TabIndex = 23;
+            this.butSelectAll.Text = "Mostrar todos";
+            this.butSelectAll.UseVisualStyleBackColor = true;
+            this.butSelectAll.Click += new System.EventHandler(this.butSelectAll_Click);
+            // 
+            // comboDepartment
+            // 
+            this.comboDepartment.FormattingEnabled = true;
+            this.comboDepartment.Location = new System.Drawing.Point(609, 173);
+            this.comboDepartment.Name = "comboDepartment";
+            this.comboDepartment.Size = new System.Drawing.Size(136, 21);
+            this.comboDepartment.TabIndex = 10;
+            // 
+            // comboJob
+            // 
+            this.comboJob.FormattingEnabled = true;
+            this.comboJob.Location = new System.Drawing.Point(327, 241);
+            this.comboJob.Name = "comboJob";
+            this.comboJob.Size = new System.Drawing.Size(139, 21);
+            this.comboJob.TabIndex = 7;
+            // 
+            // comboEmployee
+            // 
+            this.comboEmployee.FormattingEnabled = true;
+            this.comboEmployee.Location = new System.Drawing.Point(609, 97);
+            this.comboEmployee.Name = "comboEmployee";
+            this.comboEmployee.Size = new System.Drawing.Size(136, 21);
+            this.comboEmployee.TabIndex = 9;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 435);
+            this.ClientSize = new System.Drawing.Size(800, 579);
+            this.Controls.Add(this.comboEmployee);
+            this.Controls.Add(this.comboJob);
+            this.Controls.Add(this.comboDepartment);
+            this.Controls.Add(this.butSelectAll);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.butInsert);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.departmentIdBox);
             this.Controls.Add(this.label13);
-            this.Controls.Add(this.managerIdBox);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.jobIdBox);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.salaryBox);
             this.Controls.Add(this.label8);
@@ -277,7 +303,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox lastNameBox;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox jobIdBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox salaryBox;
         private System.Windows.Forms.Label label8;
@@ -285,9 +310,12 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox phoneNumberBox;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox departmentIdBox;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox managerIdBox;
         private System.Windows.Forms.Button butInsert;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button butSelectAll;
+        private System.Windows.Forms.ComboBox comboDepartment;
+        private System.Windows.Forms.ComboBox comboJob;
+        private System.Windows.Forms.ComboBox comboEmployee;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -13,7 +14,6 @@ namespace ConnexionSQL
     {
         private DBConnection connection;
         
-
         public EmployeeDAL()
         {
             this.connection = new DBConnection();
@@ -67,9 +67,40 @@ namespace ConnexionSQL
             return text;
         }
 
-        public void Select(string query)
+        public List<Employee> SelectAll()
         {
+            connection.OpenConnection();
+            SqlCommand command = connection.ExecuteQuery("SELECT * FROM EMPLOYEES");
 
+            List<Employee> employees = new List<Employee>();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read()) // mientras haya cosas que leer
+            {
+                Employee employee = new Employee();
+
+                employee.EmployeeId = reader.GetInt32(reader.GetOrdinal("employee_id"));
+                employee.FirstName = reader.IsDBNull(reader.GetOrdinal("first_name")) ? null : reader.GetString(reader.GetOrdinal("first_name"));
+                employee.LastName = reader.GetString(reader.GetOrdinal("last_name"));
+                employee.Email = reader.GetString(reader.GetOrdinal("email"));
+                employee.PhoneNumber = reader.IsDBNull(reader.GetOrdinal("phone_number")) ? null : reader.GetString(reader.GetOrdinal("phone_number"));
+                employee.HireDate = reader.GetDateTime(reader.GetOrdinal("hire_date"));
+                employee.JobId = reader.GetInt32(reader.GetOrdinal("job_id"));
+                employee.Salary = reader.GetDecimal(reader.GetOrdinal("salary"));
+                
+                if (!reader.IsDBNull(reader.GetOrdinal("manager_id")))
+                    employee.ManagerId = reader.GetInt32(reader.GetOrdinal("job_id"));
+
+                if (!reader.IsDBNull(reader.GetOrdinal("department_id")))
+                    employee.DepartmentId = reader.GetInt32(reader.GetOrdinal("department_id"));
+
+                
+                employees.Add(employee);
+            }
+            reader.Close();
+            connection.CloseConnection();
+
+            return employees;
         }
     }
 }

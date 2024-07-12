@@ -16,13 +16,13 @@ namespace ConnexionSQL
         private string phone_number;
         private DateTime hire_date;
         private int job_id;
-        private double salary;
-        private int manager_id;
-        private int department_id;
+        private decimal salary;
+        private int? manager_id;
+        private int? department_id;
 
         public Employee(int employee_id, string first_name, 
             string last_name, string email, string phone_number, 
-            DateTime hire_date, int job_id, double salary, int manager_id, 
+            DateTime hire_date, int job_id, decimal salary, int manager_id, 
             int department_id)
         {
             this.employee_id = employee_id;
@@ -35,6 +35,11 @@ namespace ConnexionSQL
             this.salary = salary;
             this.manager_id = manager_id;
             this.department_id = department_id;
+        }
+
+        public Employee()
+        {
+
         }
 
         public int EmployeeId
@@ -79,7 +84,7 @@ namespace ConnexionSQL
             set { job_id = value; }
         }
 
-        public double Salary
+        public decimal Salary
         {
             get { return salary; }
             set { salary = value; }
@@ -87,14 +92,31 @@ namespace ConnexionSQL
 
         public int ManagerId
         {
-            get { return manager_id; }
+            get { return (int)manager_id; }
             set { manager_id = value; }
         }
 
         public int DepartmentId
         {
-            get { return department_id; }
+            get { return (int)department_id; }
             set { department_id = value; }
+        }
+
+        public override string ToString()
+        {
+            string text = "";
+            text += employee_id.ToString() + " ";
+            text += first_name + " ";
+            text += last_name + " ";
+            text += email + " ";
+            text += phone_number + " ";
+            text += hire_date.ToString() + " ";
+            text += job_id.ToString() + " ";
+            text += salary.ToString() + " ";
+            text += manager_id.ToString() + " ";
+            text += department_id.ToString();
+
+            return text;
         }
     }
 }
