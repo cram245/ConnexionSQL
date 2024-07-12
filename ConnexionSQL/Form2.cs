@@ -44,18 +44,16 @@ namespace ConnexionSQL
             Department selectedDepartment = (Department)comboDepartment.Items[comboDepartment.SelectedIndex];
             Job selectedJob = (Job)comboJob.Items[comboJob.SelectedIndex];
             int selectedEmployeeId = (int)comboEmployee.SelectedValue;
-            MessageBox.Show(selectedEmployeeId.ToString());
             Employee emp = new Employee(0,
                 firstNameBox.Text, lastNameBox.Text, emailBox.Text, phoneNumberBox.Text,
                 DateTime.Parse(hireDateBox.Text), selectedJob.JobId, Decimal.Parse(salaryBox.Text), 
                 selectedEmployeeId, selectedDepartment.DepartmentID);
 
             
-            /*
+            
             EmployeeDAL empDAL = new EmployeeDAL();
             empDAL.Insert(emp);
             this.Close();
-            */
         }
 
         private void butSelectAll_Click(object sender, EventArgs e)
